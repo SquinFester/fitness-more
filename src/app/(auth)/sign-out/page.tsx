@@ -1,11 +1,13 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function Page() {
   const logIn = async () => {
     try {
-      signIn("google");
+      signOut({
+        callbackUrl: "/",
+      });
     } catch (error) {
       console.log("sa");
     }
@@ -13,7 +15,7 @@ export default function Page() {
 
   return (
     <div>
-      <button onClick={logIn}>log</button>
+      <button onClick={logIn}>out</button>
     </div>
   );
 }

@@ -1,0 +1,2 @@
+1. if user is logged throw it to dashboard but it isnt throw it to home page
+2. profile, when user want to add profile img on its profile
