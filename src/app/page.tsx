@@ -1,6 +1,7 @@
 import { Carousel } from "@/components/Carousel/Carousel";
 import { FlexDescription } from "@/components/HomePageElements/FlexDescription";
 import { OfferSection } from "@/components/HomePageElements/OfferSection";
+import { RecipesCard } from "@/components/HomePageElements/RecipesCard";
 import { ToolsDescription } from "@/components/HomePageElements/ToolsDescription";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
@@ -68,7 +69,7 @@ export default async function Home() {
             imageSrc={"/tool-icons/shoe.svg"}
             alt="shoe"
             title="Stay Motivated."
-            description="Join the World’s Largest Fitness Community for advice, tips, and support 24/7."
+            description="Join the World&#x27;s Largest Fitness Community for advice, tips, and support 24/7."
           />
         </section>
       </OfferSection>
@@ -77,6 +78,56 @@ export default async function Home() {
         description="Every day, more than 3,000 members reach their goals with MyFitnessPal. Get inspired for the journey ahead."
       >
         <Carousel />
+        <Button className="uppercase w-full font-bold text-lg sm:max-w-lg mx-auto py-6 mt-10">
+          Start your journey today
+        </Button>
+      </OfferSection>
+      <OfferSection
+        title="Recipes & Inspiration"
+        description="Get nutritionist-approved recipes and motivational workout tips from MyFitnessPal experts."
+      >
+        <section className="grid grid-cols-1 sm:grid-cols-3 content-between gap-10 ">
+          <RecipesCard
+            href="https://blog.myfitnesspal.com/10-make-ahead-breakfasts-under-300-calories/"
+            imageSrc="/recipes/rice.png"
+            alt="rice"
+            title="15 Make-Ahead Breakfasts Under 300 Calories"
+          />
+          <RecipesCard
+            href="https://blog.myfitnesspal.com/the-problem-with-cheat-days/"
+            imageSrc="/recipes/cheat-day.png"
+            alt="cheat day"
+            title="The Problem With Cheat Days"
+          />
+          <RecipesCard
+            href="https://blog.myfitnesspal.com/essential-guide-to-movement-activity/"
+            imageSrc="/recipes/jog.png"
+            alt="jogging woman"
+            title="Essentail Guide to Getting Moving"
+          />
+        </section>
+      </OfferSection>
+      <OfferSection
+        title="Connect with over 50 apps."
+        description="Easily link your MyFitnessPal account with apps that support your healthier lifestyle. It&#x27;s not just about calories. It&#x27;s about feeling better, looking better, and living better."
+      >
+        <Image
+          src="/apps.png"
+          alt="apps composition"
+          width={600}
+          height={600}
+          className="mx-auto"
+        />
+        <p className="text-xs text-zinc-600 mt-10 max-w-2xl text-center mx-auto">
+          MyFitnessPal is one of the best weight loss apps and fitness apps,
+          helping nearly 1 million members reach their nutrition and fitness
+          goals every year. Members use it as a calories tracker and calorie
+          counter to log their foods, and take advantage of the app&#x27;s food
+          database that contains over 14 million foods. It&#x27;s not just a
+          free calorie counter app — it&#x27;s also the best calorie counter app
+          for people who are looking to take back control of their health and
+          fitness.
+        </p>
       </OfferSection>
     </>
   );
