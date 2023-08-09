@@ -1,4 +1,4 @@
-import { CardTheme } from "@/components/Carousel/CardTheme";
+import { Carousel } from "@/components/Carousel/Carousel";
 import { FlexDescription } from "@/components/HomePageElements/FlexDescription";
 import { OfferSection } from "@/components/HomePageElements/OfferSection";
 import { ToolsDescription } from "@/components/HomePageElements/ToolsDescription";
@@ -76,12 +76,7 @@ export default async function Home() {
         title="Victory Stories"
         description="Every day, more than 3,000 members reach their goals with MyFitnessPal. Get inspired for the journey ahead."
       >
-        <CardTheme
-          imageSrc="/people/person1.png"
-          title="Education helped her lose 30 pounds."
-          description="MyFitnessPal gave me a wake up call to the way I was eating and made things clear what I needed to change."
-          name="Stephanie"
-        />
+        <Carousel />
       </OfferSection>
     </>
   );
