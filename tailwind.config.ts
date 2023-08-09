@@ -10,9 +10,9 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "4rem",
+      padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1050px",
       },
     },
     extend: {
@@ -70,6 +70,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      boxShadow: {
+        circle: "0px 0px 37px -20px rgba(66, 68, 90, 1)",
       },
     },
   },
