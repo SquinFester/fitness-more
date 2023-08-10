@@ -9,7 +9,7 @@ import Image from "next/image";
 export default async function Home() {
   return (
     <>
-      <main className="mt-10 flex flex-col justify-center gap-20 container ">
+      <main className="mt-10 flex flex-col justify-center gap-20 ">
         <FlexDescription>
           <section className="flex flex-col text-center gap-4  sm:gap-8">
             <h1 className="text-4xl sm:text-7xl font-extrabold">

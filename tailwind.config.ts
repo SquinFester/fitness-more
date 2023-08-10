@@ -73,6 +73,7 @@ module.exports = {
       },
       boxShadow: {
         circle: "0px 0px 37px -20px rgba(66, 68, 90, 1)",
+        around: "3px 3px 35px -17px rgba(66, 68, 90, 1)",
       },
     },
   },

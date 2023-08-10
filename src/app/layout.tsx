@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer/Footer";
+import { Toaster } from "@/components/ui/Toaster";
 
 export const metadata: Metadata = {
   title: "Fitness More",
@@ -16,14 +17,18 @@ const inter = Inter({
 
 export default function RootLayout({
   children,
+  authModal,
 }: {
   children: React.ReactNode;
+  authModal: React.ReactNode;
 }) {
   return (
     <html lang="en" className={inter.className}>
       <body>
         <Navbar />
-        {children}
+        {authModal}
+        <div className="container">{children}</div>
+        <Toaster />
         <Footer />
       </body>
     </html>

@@ -1,19 +1,11 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { LoginForm } from "@/components/Login/LoginForm";
 
 export default function Page() {
-  const logIn = async () => {
-    try {
-      signIn("google");
-    } catch (error) {
-      console.log("sa");
-    }
-  };
-
   return (
-    <div>
-      <button onClick={logIn}>log</button>
-    </div>
+    <main className="mt-20 flex justify-center w-full h-full">
+      <LoginForm />
+    </main>
   );
 }
