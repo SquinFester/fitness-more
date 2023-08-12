@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "../ui/Button";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "../../lib/use-toast";
 import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 

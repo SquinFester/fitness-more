@@ -1,14 +1,15 @@
-"use client";
-
-import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { Button, buttonVariants } from "../ui/Button";
+import { buttonVariants } from "../ui/Button";
 import { cn } from "@/lib/utils";
+import { getAuthSession } from "@/lib/auth";
+import UserMenu from "./UserMenu";
 
-export const LoginButtons = ({ isLogged }: { isLogged: boolean }) => {
+export const LoginButtons = async () => {
+  const session = await getAuthSession();
+
   return (
     <>
-      {!isLogged ? (
+      {!session ? (
         <Link
           href="/sign-in"
           className={cn(
@@ -21,17 +22,7 @@ export const LoginButtons = ({ isLogged }: { isLogged: boolean }) => {
           Sign in
         </Link>
       ) : (
-        <Button
-          className={"text-lg"}
-          variant="ghost"
-          onClick={() => {
-            signOut({
-              callbackUrl: "/",
-            });
-          }}
-        >
-          Sign out
-        </Button>
+        <UserMenu fullname={session.user.name} />
       )}
     </>
   );

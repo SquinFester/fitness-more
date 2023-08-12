@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer/Footer";
 import { Toaster } from "@/components/ui/Toaster";
+import { usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Fitness More",
@@ -24,10 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body>
+      <body className="min-h-screen">
         <Navbar />
         {authModal}
-        <div className="container">{children}</div>
+        <div className="container h-full">{children}</div>
         <Toaster />
         <Footer />
       </body>
