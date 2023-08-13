@@ -15,24 +15,24 @@ export const activityLevelOptions = [
   "Very Active",
 ] as const;
 
-export const GoalFormValidator = z.object({
+export const GoalFormSchema = z.object({
   goal: z.enum([...goalOptions]),
   age: z.preprocess(
     (a) => parseInt(z.string().parse(a), 10),
-    z
-      .number()
-      .min(8, { message: "You are too young" })
-      .max(100, { message: "You are too old" })
+    z.number().min(8).max(100)
   ),
+
   gender: z.enum([...genderOptions]),
   height: z.preprocess(
     (a) => parseInt(z.string().parse(a), 10),
     z.number().min(100).max(210)
   ),
+
   weight: z.preprocess(
     (a) => parseInt(z.string().parse(a), 10),
     z.number().min(30).max(200)
   ),
+
   goalWeight: z.preprocess(
     (a) => parseInt(z.string().parse(a), 10),
     z.number().min(30).max(200)
@@ -40,4 +40,4 @@ export const GoalFormValidator = z.object({
   activityLevel: z.enum([...activityLevelOptions]),
 });
 
-export type GoalFormType = z.infer<typeof GoalFormValidator>;
+export type GoalFormType = z.infer<typeof GoalFormSchema>;

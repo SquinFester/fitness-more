@@ -1,7 +1,13 @@
 "use client";
 
-import { ControllerRenderProps } from "react-hook-form";
 import { FormControl, FormItem, FormLabel } from "../ui/Form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/Select";
 
 const SelectInput = ({
   options,

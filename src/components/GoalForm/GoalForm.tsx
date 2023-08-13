@@ -2,29 +2,28 @@
 
 import {
   GoalFormType,
-  GoalFormValidator,
-  activityLevelOptions,
+  GoalFormSchema,
   genderOptions,
   goalOptions,
+  activityLevelOptions,
 } from "@/lib/validators/goal-form";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import SelectInput from "./SelectInput";
 import { RadioInput } from "./RadioInput";
-import { Input } from "./Input";
+import { InputWithLabel } from "./InputWithLabel";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/Form";
+import { Form, FormField, FormMessage } from "../ui/Form";
 import { Button } from "../ui/Button";
 
 export const GoalForm = () => {
   const form = useForm<GoalFormType>({
-    resolver: zodResolver(GoalFormValidator),
+    resolver: zodResolver(GoalFormSchema),
+    defaultValues: {
+      age: "",
+      height: "",
+      weight: "",
+      goalWeight: "",
+    },
   });
   const { handleSubmit, control } = form;
 
@@ -32,7 +31,7 @@ export const GoalForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={control}
           name="gender"
@@ -49,10 +48,9 @@ export const GoalForm = () => {
         />
         <FormField
           control={control}
-          name="goalWeight"
+          name="goal"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>goalWeight</FormLabel>
+            <>
               <SelectInput
                 options={[...goalOptions]}
                 label="goal"
@@ -60,116 +58,86 @@ export const GoalForm = () => {
                 placeholder="choose your goal"
               />
               <FormMessage />
-            </FormItem>
+            </>
           )}
         />
+        <FormField
+          control={control}
+          name="activityLevel"
+          render={({ field }) => (
+            <>
+              <SelectInput
+                options={[...activityLevelOptions]}
+                label="activity"
+                field={field}
+                placeholder="choose your avtivity level"
+              />
+              <FormMessage />
+            </>
+          )}
+        />
+        <FormField
+          control={control}
+          name="age"
+          render={({ field }) => (
+            <>
+              <InputWithLabel
+                placeholder="type your age..."
+                label="Your age"
+                type="number"
+                field={field}
+              />
+              <FormMessage />
+            </>
+          )}
+        />
+        <FormField
+          control={control}
+          name="height"
+          render={({ field }) => (
+            <>
+              <InputWithLabel
+                placeholder="type your height..."
+                label="Your height"
+                type="number"
+                field={field}
+              />
+              <FormMessage />
+            </>
+          )}
+        />
+        <FormField
+          control={control}
+          name="weight"
+          render={({ field }) => (
+            <>
+              <InputWithLabel
+                placeholder="type your weight..."
+                label="Your weight"
+                type="number"
+                field={field}
+              />
+              <FormMessage />
+            </>
+          )}
+        />
+        <FormField
+          control={control}
+          name="goalWeight"
+          render={({ field }) => (
+            <>
+              <InputWithLabel
+                placeholder="type your goalWeight..."
+                label="Your goalWeight"
+                type="number"
+                field={field}
+              />
+              <FormMessage />
+            </>
+          )}
+        />
+        <Button type="submit">Submit</Button>
       </form>
-      <Button type="submit">click</Button>
     </Form>
-    // <form
-    //   onSubmit={handleSubmit(onSubmit)}
-    //   className="flex flex-col justify-between items-start gap-10"
-    // >
-    //   <Controller
-    //     name="goal"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <SelectInput
-    //         options={[...goalOptions]}
-    //         label="Your goal"
-    //         name="goal"
-    //         field={field}
-    //       />
-    //     )}
-    //   />
-    //   <Controller
-    //     name="activityLevel"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <SelectInput
-    //         options={[...activityLevelOptions]}
-    //         label="Your activityLevel"
-    //         name="activity-lvl"
-    //         field={field}
-    //       />
-    //     )}
-    //   />
-    //   {errors.age?.message && <p>{errors.age?.message}</p>}
-    //   <Controller
-    //     name="gender"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <FormItem>
-    //         <FormLabel>Gender:</FormLabel>
-    //         <RadioInput
-    //           options={[...genderOptions]}
-    //           label="Gender"
-    //           name="gender"
-    //           field={field}
-    //         />
-    //       </FormItem>
-    //     )}
-    //   />
-    //   <Controller
-    //     name="age"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <Input
-    //         placeholder="age..."
-    //         label="Type your age"
-    //         name={"age"}
-    //         type="number"
-    //         field={field}
-    //       />
-    //     )}
-    //   />
-    //   <Controller
-    //     name="height"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <Input
-    //         placeholder="height..."
-    //         label="Type your height"
-    //         name={"height"}
-    //         type="number"
-    //         field={field}
-    //       />
-    //     )}
-    //   />
-    //   <Controller
-    //     name="weight"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <Input
-    //         placeholder="weight..."
-    //         label="Type your weight"
-    //         name={"weight"}
-    //         type="number"
-    //         field={field}
-    //       />
-    //     )}
-    //   />
-    //   <Controller
-    //     name="goalWeight"
-    //     control={control}
-    //     rules={{ required: true }}
-    //     render={({ field }) => (
-    //       <Input
-    //         placeholder="Your goal weight..."
-    //         label="Type your goal weight"
-    //         name={"goalWeight"}
-    //         type="number"
-    //         field={field}
-    //       />
-    //     )}
-    //   />
-    //   <button type="submit">submit</button>
-    // </form>
   );
 };
