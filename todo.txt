@@ -1,2 +1,8 @@
 1. if user is logged throw it to dashboard but it isnt throw it to home page
 2. profile, when user want to add profile img on its profile
+
+to do today:
+    - make a form, which takes informations from user, valid them and send to server
+        - prisma: add new table
+        - form: react hook form
+        - post it to a server and valid it by zod
