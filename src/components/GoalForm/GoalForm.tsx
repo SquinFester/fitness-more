@@ -15,6 +15,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormMessage } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 export const GoalForm = () => {
   const [showGoalWeight, setshowGoalWeight] = useState(false);
@@ -32,7 +34,19 @@ export const GoalForm = () => {
   });
   const { handleSubmit, control, watch } = form;
 
-  const onSubmit: SubmitHandler<GoalFormType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<GoalFormType> = (data) => {
+    mutate(data);
+  };
+
+  const { mutate, isLoading } = useMutation({
+    mutationKey: "formGoal",
+    mutationFn: async (information: GoalFormType) => {
+      const { data } = await axios.post("/api/goal-form", information);
+      return data as string;
+    },
+    onSuccess: () => console.log("succes"),
+    onError: () => console.log("error"),
+  });
 
   useEffect(() => {
     if (watch("goal")) {
@@ -86,7 +100,7 @@ export const GoalForm = () => {
               <div>
                 <InputWithLabel
                   placeholder="type your goal weight..."
-                  label="Your goal weight"
+                  label="Your goal weight (kg)"
                   type="number"
                   field={field}
                 />
@@ -133,7 +147,7 @@ export const GoalForm = () => {
             <div>
               <InputWithLabel
                 placeholder="type your height..."
-                label="Your height"
+                label="Your height (cm)"
                 type="number"
                 field={field}
               />
@@ -148,7 +162,7 @@ export const GoalForm = () => {
             <div>
               <InputWithLabel
                 placeholder="type your weight..."
-                label="Your weight"
+                label="Your weight (kg)"
                 type="number"
                 field={field}
               />
@@ -157,7 +171,12 @@ export const GoalForm = () => {
           )}
         />
 
-        <Button type="submit" className="w-full md:float-right md:w-1/3">
+        <Button
+          type="submit"
+          className="w-full md:float-right md:w-1/3"
+          isLoading={isLoading}
+          disabled={isLoading}
+        >
           Submit
         </Button>
       </form>

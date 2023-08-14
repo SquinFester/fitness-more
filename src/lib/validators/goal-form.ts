@@ -42,4 +42,14 @@ export const GoalFormSchema = z.object({
   activityLevel: z.enum([...activityLevelOptions]),
 });
 
+export const GoalFormValidator = z.object({
+  goal: z.enum([...goalOptions]),
+  age: z.number().min(8).max(100),
+  gender: z.enum([...genderOptions]),
+  height: z.number().min(100).max(210),
+  weight: z.number().min(30).max(200),
+  goalWeight: z.number().min(30).max(200).optional(),
+  activityLevel: z.enum([...activityLevelOptions]),
+});
+
 export type GoalFormType = z.infer<typeof GoalFormSchema>;

@@ -43,5 +43,27 @@ model User {
   image         String?
   emailVerified DateTime?
   accounts      Account[]
+  formGoal      FormGoal?
   sessions      Session[]
+  weight        Weight[]
+}
+
+model Weight {
+  id        String   @id @default(cuid())
+  userId    String
+  weight    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model FormGoal {
+  goal          String
+  age           Int
+  gender        String
+  height        Int
+  weight        Int
+  goalWeight    Int
+  activityLevel String
+  userId        String @id
+  user          User   @relation(fields: [userId], references: [id])
 }
