@@ -33,10 +33,12 @@ export const GoalFormSchema = z.object({
     z.number().min(30).max(200)
   ),
 
-  goalWeight: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z.number().min(30).max(200)
-  ),
+  goalWeight: z
+    .preprocess(
+      (a) => parseInt(z.string().parse(a), 10),
+      z.number().min(30).max(200)
+    )
+    .optional(),
   activityLevel: z.enum([...activityLevelOptions]),
 });
 

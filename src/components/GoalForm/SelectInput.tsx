@@ -20,12 +20,6 @@ const SelectInput = ({
   placeholder: string;
   field: any;
 }) => {
-  const renderOptions = options.map((option, index) => (
-    <SelectItem key={index} value={option}>
-      {option}
-    </SelectItem>
-  ));
-
   return (
     <FormItem>
       <FormLabel>{label}:</FormLabel>
@@ -35,16 +29,15 @@ const SelectInput = ({
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
         </FormControl>
-        <SelectContent>{renderOptions}</SelectContent>
+        <SelectContent>
+          {options.map((option, index) => (
+            <SelectItem key={index} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
       </Select>
     </FormItem>
-
-    // <>
-    //   <label htmlFor={name}>{label}:</label>
-    //   <select id={name} {...field}>
-    //     {renderOptions}
-    //   </select>
-    // </>
   );
 };
 export default SelectInput;

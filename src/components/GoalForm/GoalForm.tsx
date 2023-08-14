@@ -14,20 +14,37 @@ import { InputWithLabel } from "./InputWithLabel";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormMessage } from "../ui/Form";
 import { Button } from "../ui/Button";
+import { useEffect, useState } from "react";
 
 export const GoalForm = () => {
+  const [showGoalWeight, setshowGoalWeight] = useState(false);
   const form = useForm<GoalFormType>({
     resolver: zodResolver(GoalFormSchema),
     defaultValues: {
+      // @ts-expect-error
       age: "",
+      // @ts-expect-error
       height: "",
+      // @ts-expect-error
       weight: "",
-      goalWeight: "",
+      // goalWeight: "",
     },
   });
-  const { handleSubmit, control } = form;
+  const { handleSubmit, control, watch } = form;
 
   const onSubmit: SubmitHandler<GoalFormType> = (data) => console.log(data);
+
+  useEffect(() => {
+    if (watch("goal")) {
+      if (watch("goal") !== "Maintain Weight") {
+        setshowGoalWeight(true);
+      } else {
+        setshowGoalWeight(false);
+      }
+    } else {
+      setshowGoalWeight(false);
+    }
+  }, [watch("goal")]);
 
   return (
     <Form {...form}>
@@ -36,66 +53,84 @@ export const GoalForm = () => {
           control={control}
           name="gender"
           render={({ field }) => (
-            <>
+            <div>
               <RadioInput
                 options={[...genderOptions]}
                 field={field}
-                label="gender"
+                label="Gender"
               />
               <FormMessage />
-            </>
+            </div>
           )}
         />
         <FormField
           control={control}
           name="goal"
           render={({ field }) => (
-            <>
+            <div>
               <SelectInput
                 options={[...goalOptions]}
-                label="goal"
+                label="Your goal"
                 field={field}
-                placeholder="choose your goal"
+                placeholder="select your goal"
               />
               <FormMessage />
-            </>
+            </div>
           )}
         />
+        {showGoalWeight ? (
+          <FormField
+            control={control}
+            name="goalWeight"
+            render={({ field }) => (
+              <div>
+                <InputWithLabel
+                  placeholder="type your goal weight..."
+                  label="Your goal weight"
+                  type="number"
+                  field={field}
+                />
+                <FormMessage />
+              </div>
+            )}
+          />
+        ) : null}
+
         <FormField
           control={control}
           name="activityLevel"
           render={({ field }) => (
-            <>
+            <div>
               <SelectInput
                 options={[...activityLevelOptions]}
-                label="activity"
+                label="Your avtivity"
                 field={field}
-                placeholder="choose your avtivity level"
+                placeholder="select your avtivity level"
               />
               <FormMessage />
-            </>
+            </div>
           )}
         />
         <FormField
           control={control}
           name="age"
           render={({ field }) => (
-            <>
+            <div>
               <InputWithLabel
-                placeholder="type your age..."
                 label="Your age"
+                placeholder="type your age..."
                 type="number"
                 field={field}
               />
               <FormMessage />
-            </>
+            </div>
           )}
         />
         <FormField
           control={control}
           name="height"
           render={({ field }) => (
-            <>
+            <div>
               <InputWithLabel
                 placeholder="type your height..."
                 label="Your height"
@@ -103,14 +138,14 @@ export const GoalForm = () => {
                 field={field}
               />
               <FormMessage />
-            </>
+            </div>
           )}
         />
         <FormField
           control={control}
           name="weight"
           render={({ field }) => (
-            <>
+            <div>
               <InputWithLabel
                 placeholder="type your weight..."
                 label="Your weight"
@@ -118,25 +153,13 @@ export const GoalForm = () => {
                 field={field}
               />
               <FormMessage />
-            </>
+            </div>
           )}
         />
-        <FormField
-          control={control}
-          name="goalWeight"
-          render={({ field }) => (
-            <>
-              <InputWithLabel
-                placeholder="type your goalWeight..."
-                label="Your goalWeight"
-                type="number"
-                field={field}
-              />
-              <FormMessage />
-            </>
-          )}
-        />
-        <Button type="submit">Submit</Button>
+
+        <Button type="submit" className="w-full md:float-right md:w-1/3">
+          Submit
+        </Button>
       </form>
     </Form>
   );

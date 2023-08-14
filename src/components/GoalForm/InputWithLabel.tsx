@@ -14,7 +14,7 @@ export const InputWithLabel = ({
 }) => {
   return (
     <FormItem>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel>{label}:</FormLabel>
       <FormControl>
         <Input placeholder={placeholder} {...field} type={type} />
       </FormControl>

@@ -12,20 +12,23 @@ export const RadioInput = ({
   label: string;
   field: any;
 }) => {
-  const renderOptions = options.map((option, index) => (
-    <FormItem key={index}>
-      <FormControl>
-        <RadioGroupItem value={option} />
-      </FormControl>
-      <FormLabel>{option}</FormLabel>
-    </FormItem>
-  ));
   return (
     <FormItem>
       <FormLabel>{label}:</FormLabel>
       <FormControl>
-        <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
-          {renderOptions}
+        <RadioGroup
+          onValueChange={field.onChange}
+          defaultValue={field.value}
+          className="flex gap-10"
+        >
+          {options.map((option, index) => (
+            <FormItem key={index} className="space-x-2">
+              <FormControl>
+                <RadioGroupItem value={option} />
+              </FormControl>
+              <FormLabel>{option}</FormLabel>
+            </FormItem>
+          ))}
         </RadioGroup>
       </FormControl>
     </FormItem>

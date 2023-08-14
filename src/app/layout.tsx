@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen">
+      <body className="min-h-screen flex flex-col justify-between">
         <Navbar />
         {authModal}
         <div className="container h-full">{children}</div>
