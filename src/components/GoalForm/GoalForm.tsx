@@ -16,10 +16,15 @@ import { Form, FormField, FormMessage } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/lib/use-toast";
 
 export const GoalForm = () => {
   const [showGoalWeight, setshowGoalWeight] = useState(false);
+
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<GoalFormType>({
     resolver: zodResolver(GoalFormSchema),
     defaultValues: {
@@ -29,7 +34,6 @@ export const GoalForm = () => {
       height: "",
       // @ts-expect-error
       weight: "",
-      // goalWeight: "",
     },
   });
   const { handleSubmit, control, watch } = form;
@@ -44,8 +48,22 @@ export const GoalForm = () => {
       const { data } = await axios.post("/api/goal-form", information);
       return data as string;
     },
-    onSuccess: () => console.log("succes"),
-    onError: () => console.log("error"),
+    onSuccess: async () => {
+      router.push("/dashboard");
+    },
+    onError: async (err) => {
+      if (err instanceof AxiosError) {
+        if (err.response?.status === 401) {
+          router.push("/sign-in");
+        } else {
+          toast({
+            title: "Something went wrong",
+            description: "Couldn't send a form try again",
+            variant: "destructive",
+          });
+        }
+      }
+    },
   });
 
   useEffect(() => {

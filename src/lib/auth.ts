@@ -45,7 +45,7 @@ export const authOption: NextAuthOptions = {
         image: dbUser.image,
       };
     },
-    redirect() {
+    async redirect() {
       return "/";
     },
   },
