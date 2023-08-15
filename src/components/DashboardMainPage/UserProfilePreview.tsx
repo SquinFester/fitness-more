@@ -1,12 +1,59 @@
-export const UserProfilePreview = () => {
+import { User } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import { GoalFormType } from "@/lib/validators/goal-form";
+import { FormGoal } from "@prisma/client";
+import Link from "next/link";
+
+type UserProfilePreviewProps = {
+  image: string | undefined | null;
+  name: string;
+  formInfo: FormGoal | null;
+};
+
+export const UserProfilePreview = ({
+  image,
+  name,
+  formInfo,
+}: UserProfilePreviewProps) => {
   return (
-    <section className="grid grid-cols-3">
-      <div className="bg-zinc-600 h-[200px] col-span-1"></div>
-      <div className="bg-slate-600 col-span-2">
-        <h1>Name</h1>
-        <h1>Name</h1>
-        <h1>Name</h1>
-        <h1>Name</h1>
+    <section className="grid grid-cols-3 shadow-md divide-x-2 py-4">
+      <div className=" flex justify-center items-center">
+        <Avatar className="w-20 h-20">
+          {image ? (
+            <AvatarImage src={image} alt="user's profile" />
+          ) : (
+            <AvatarFallback>
+              <User />
+            </AvatarFallback>
+          )}
+        </Avatar>
+      </div>
+      <div className="col-span-2 p-5">
+        <h1 className="text-lg font-semibold">{name}</h1>
+        {formInfo ? (
+          <>
+            <p>
+              <span className="font-medium">Goal: </span>
+              {formInfo.goal}
+            </p>
+            <p>
+              <span className="font-medium">Weight: </span>
+              {formInfo.weight} kg
+            </p>
+            {formInfo.goal === "Maintain Weight" ? null : (
+              <p>
+                <span className="font-medium">Target weight: </span>
+                {formInfo.goalWeight} kg
+              </p>
+            )}
+            <p>
+              <span className="font-medium">Activity level: </span>
+              {formInfo.activityLevel}
+            </p>
+          </>
+        ) : (
+          <Link href="/dashboard/goal-form">fill form</Link>
+        )}
       </div>
     </section>
   );
