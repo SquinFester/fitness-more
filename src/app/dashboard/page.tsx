@@ -1,8 +1,9 @@
-import { LineChart } from "@/components/DashboardMainPage/LineChart";
+import { LineChart } from "@/components/DashboardMainPage/UserWeightStats/LineChart";
 import { UserProfilePreview } from "@/components/DashboardMainPage/UserProfilePreview";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Link from "next/link";
+import { AddWeight } from "@/components/DashboardMainPage/UserWeightStats/AddWeight";
 
 export default async function Dashboard() {
   const session = await getAuthSession();
@@ -51,6 +52,7 @@ export default async function Dashboard() {
           },
         ]}
       />
+      <AddWeight />
       here should be a grapth with weight and button to set current weight
       update your weight your workout your proggress
     </main>

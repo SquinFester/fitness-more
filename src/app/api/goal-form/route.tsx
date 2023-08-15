@@ -50,6 +50,13 @@ export const POST = async (req: Request) => {
       });
     }
 
+    await db.weight.create({
+      data: {
+        userId: session.user.id,
+        weight: weight,
+      },
+    });
+
     return new Response("success");
   } catch (error) {
     if (error instanceof z.ZodError) {
