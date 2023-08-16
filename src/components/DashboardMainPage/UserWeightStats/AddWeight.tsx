@@ -20,7 +20,7 @@ export const AddWeight = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Update your weight</DialogTitle>
-          <DialogDescription>
+          <DialogDescription asChild>
             <AddWeightForm />
           </DialogDescription>
         </DialogHeader>

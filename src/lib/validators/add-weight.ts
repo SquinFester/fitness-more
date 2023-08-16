@@ -9,7 +9,7 @@ export const addWeightScheme = z.object({
 });
 
 export const addWeightValidator = z.object({
-  date: z.date(),
+  date: z.string().pipe(z.coerce.date()),
   weight: z.number().min(30).max(200),
 });
 

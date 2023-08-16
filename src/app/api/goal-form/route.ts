@@ -54,6 +54,7 @@ export const POST = async (req: Request) => {
       data: {
         userId: session.user.id,
         weight: weight,
+        date: new Date(),
       },
     });
 

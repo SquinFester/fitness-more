@@ -26,7 +26,7 @@ export default async function Dashboard() {
     );
 
   return (
-    <main className="mt-10">
+    <main className="mt-10 space-y-10">
       <UserProfilePreview
         image={user.image}
         name={user.name}

@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/Popover";
 import { addWeightScheme, addWeightType } from "@/lib/validators/add-weight";
 import { InputWithLabel } from "@/components/GoalForm/InputWithLabel";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 export const AddWeightForm = () => {
   const form = useForm<addWeightType>({
@@ -34,7 +36,19 @@ export const AddWeightForm = () => {
 
   const { handleSubmit, control } = form;
 
-  const onSubmit = (data: addWeightType) => console.log(data);
+  const onSubmit = (data: addWeightType) => {
+    mutate(data);
+  };
+
+  const { mutate, isLoading } = useMutation({
+    mutationKey: "addWeight",
+    mutationFn: async (info: addWeightType) => {
+      const { data } = await axios.post("/api/add-weight", info);
+      return data as string;
+    },
+    onSuccess: async () => console.log("succes"),
+    onError: async () => console.log("error"),
+  });
 
   return (
     <Form {...form}>
@@ -95,7 +109,12 @@ export const AddWeightForm = () => {
             </>
           )}
         />
-        <Button type="submit" className="w-full md:w-1/3">
+        <Button
+          type="submit"
+          className="w-full md:w-1/3 "
+          disabled={isLoading}
+          isLoading={isLoading}
+        >
           Submit
         </Button>
       </form>

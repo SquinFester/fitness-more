@@ -49,11 +49,11 @@ model User {
 }
 
 model Weight {
-  userId    String
-  weight    Int
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
+  userId String
+  weight Int
+  date   DateTime
+  id     String   @id @default(cuid())
+  user   User     @relation(fields: [userId], references: [id])
 }
 
 model FormGoal {
