@@ -26,7 +26,7 @@ export default async function Dashboard() {
     );
 
   return (
-    <main>
+    <main className="mt-10">
       <UserProfilePreview
         image={user.image}
         name={user.name}
@@ -53,8 +53,10 @@ export default async function Dashboard() {
         ]}
       />
       <AddWeight />
-      here should be a grapth with weight and button to set current weight
-      update your weight your workout your proggress
+      <p>
+        here should be a grapth with weight and button to set current weight
+        update your weight your workout your proggress
+      </p>
     </main>
   );
 }

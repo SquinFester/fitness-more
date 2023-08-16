@@ -1,6 +1,5 @@
 import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-import { GoalFormType } from "@/lib/validators/goal-form";
 import { FormGoal } from "@prisma/client";
 import Link from "next/link";
 
@@ -16,7 +15,7 @@ export const UserProfilePreview = ({
   formInfo,
 }: UserProfilePreviewProps) => {
   return (
-    <section className="grid grid-cols-3 shadow-md divide-x-2 py-4">
+    <section className="grid grid-cols-3 shadow-md divide-x-2 py-4 rounded-md">
       <div className=" flex justify-center items-center">
         <Avatar className="w-20 h-20">
           {image ? (
@@ -52,7 +51,15 @@ export const UserProfilePreview = ({
             </p>
           </>
         ) : (
-          <Link href="/dashboard/goal-form">fill form</Link>
+          <div className="flex flex-col max-w-fit">
+            <p>Complete your profile to take full advantage of our app</p>
+            <Link
+              href="/dashboard/goal-form"
+              className="underline text-primaryblue w-full text-right"
+            >
+              fill form
+            </Link>
+          </div>
         )}
       </div>
     </section>

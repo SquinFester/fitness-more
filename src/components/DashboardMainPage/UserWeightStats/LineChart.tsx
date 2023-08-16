@@ -16,22 +16,14 @@ type UserWeightType = {
 Chartjs.register(CategoryScale, LinearScale, LineElement);
 
 export const LineChart = ({ userWeight }: { userWeight: UserWeightType[] }) => {
-  // tu musi byc usestate zeby moc dodac wage bez odswiezania
-
   const data = {
     labels: userWeight.map((data) => data.date),
     datasets: [
       {
         label: "Users Gained",
         data: userWeight.map((data) => data.weight),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "black",
+        backgroundColor: ["#0066EE"],
+        borderColor: "#0066EE",
         borderWidth: 2,
       },
     ],

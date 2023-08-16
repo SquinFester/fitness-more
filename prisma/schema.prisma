@@ -38,7 +38,7 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  email         String?    @unique
+  email         String?   @unique
   name          String
   image         String?
   emailVerified DateTime?
@@ -49,10 +49,10 @@ model User {
 }
 
 model Weight {
-  id        String   @id @default(cuid())
   userId    String
   weight    Int
   createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
 }
 
