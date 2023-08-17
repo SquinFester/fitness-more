@@ -47,7 +47,7 @@ export default async function Dashboard() {
             weight: 110,
           },
           {
-            date: "10-10-2023",
+            date: "12-10-2023",
             weight: 150,
           },
         ]}
