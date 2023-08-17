@@ -3,8 +3,10 @@ import { FlexDescription } from "@/components/HomePageElements/FlexDescription";
 import { OfferSection } from "@/components/HomePageElements/OfferSection";
 import { RecipesCard } from "@/components/HomePageElements/RecipesCard";
 import { ToolsDescription } from "@/components/HomePageElements/ToolsDescription";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   return (
@@ -19,9 +21,15 @@ export default async function Home() {
               Want to eat more mindfully? Track meals, learn about your habits,
               and reach your goals with MyFitnessPal.
             </p>
-            <Button className="uppercase w-full font-bold text-lg sm:w-3/4 mx-auto py-6">
+            <Link
+              href="/dashboard"
+              className={cn(
+                buttonVariants(),
+                "uppercase w-full font-bold text-lg sm:w-3/4 mx-auto py-6"
+              )}
+            >
               Start for free
-            </Button>
+            </Link>
           </section>
           <Image
             src="/breakfast.png"
@@ -78,9 +86,15 @@ export default async function Home() {
         description="Every day, more than 3,000 members reach their goals with MyFitnessPal. Get inspired for the journey ahead."
       >
         <Carousel />
-        <Button className="uppercase w-full font-bold text-lg sm:max-w-lg mx-auto py-6 mt-10">
+        <Link
+          href="/dashboard"
+          className={cn(
+            buttonVariants(),
+            "uppercase w-full font-bold text-lg sm:max-w-lg mx-auto py-6 mt-10"
+          )}
+        >
           Start your journey today
-        </Button>
+        </Link>
       </OfferSection>
       <OfferSection
         title="Recipes & Inspiration"

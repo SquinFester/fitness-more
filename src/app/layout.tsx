@@ -25,11 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen flex flex-col justify-between">
+      <body className="min-h-screen flex flex-col">
         <Navbar />
         {authModal}
         <Provider>
-          <div className="container h-full">{children}</div>
+          <div className="container h-full flex-1">{children}</div>
         </Provider>
         <Toaster />
         <Footer />

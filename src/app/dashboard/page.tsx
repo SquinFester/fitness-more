@@ -4,6 +4,7 @@ import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { AddWeight } from "@/components/DashboardMainPage/UserWeightStats/AddWeight";
+import { ErrorComunication } from "@/components/DashboardMainPage/ErrorComunication";
 
 export default async function Dashboard() {
   const session = await getAuthSession();
@@ -19,10 +20,12 @@ export default async function Dashboard() {
   });
   if (!session || !user)
     return (
-      <div>
-        <h1>you have to be logged</h1>
-        <Link href="/sign-in">Log in</Link>
-      </div>
+      <ErrorComunication
+        text="you have to be logged"
+        link="/sign-in"
+        linkText="Sign in"
+        styles="mx-auto text-xl"
+      />
     );
 
   return (
@@ -32,30 +35,42 @@ export default async function Dashboard() {
         name={user.name}
         formInfo={userForm}
       />
-      <LineChart
-        userWeight={[
-          {
-            date: "10-10-2023",
-            weight: 130,
-          },
-          {
-            date: "10-10-2023",
-            weight: 200,
-          },
-          {
-            date: "10-10-2023",
-            weight: 110,
-          },
-          {
-            date: "12-10-2023",
-            weight: 150,
-          },
-        ]}
-      />
-      <AddWeight />
+      {userForm ? (
+        <>
+          <LineChart
+            userWeight={[
+              {
+                date: "13-10-2023",
+                weight: 130,
+              },
+              {
+                date: "15-10-2023",
+                weight: 200,
+              },
+              {
+                date: "10-10-2023",
+                weight: 110,
+              },
+              {
+                date: "12-10-2023",
+                weight: 150,
+              },
+            ]}
+          />
+          <AddWeight />
+        </>
+      ) : (
+        <ErrorComunication
+          text="Complete your profile to take full advantage of our app"
+          link="/dashboard/goal-form"
+          linkText="fill form"
+          styles="mx-auto text-xl"
+        />
+      )}
+
       <p>
         here should be a grapth with weight and button to set current weight
-        update your weight your workout your proggress
+        update your weight your workout your proggress and add loadings
       </p>
     </main>
   );

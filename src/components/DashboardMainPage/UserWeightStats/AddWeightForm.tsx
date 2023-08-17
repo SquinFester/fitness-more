@@ -25,7 +25,7 @@ import { InputWithLabel } from "@/components/GoalForm/InputWithLabel";
 import { useMutation } from "react-query";
 import axios from "axios";
 
-export const AddWeightForm = () => {
+export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const form = useForm<addWeightType>({
     resolver: zodResolver(addWeightScheme),
     defaultValues: {
@@ -46,7 +46,10 @@ export const AddWeightForm = () => {
       const { data } = await axios.post("/api/add-weight", info);
       return data as string;
     },
-    onSuccess: async () => console.log("succes"),
+    onSuccess: async () => {
+      console.log("succes");
+      onSuccess;
+    },
     onError: async () => console.log("error"),
   });
 

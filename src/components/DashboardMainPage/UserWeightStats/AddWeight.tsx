@@ -10,10 +10,13 @@ import {
 } from "@/components/ui/Dialog";
 import { AddWeightForm } from "./AddWeightForm";
 import { Button } from "@/components/ui/Button";
+import { useState } from "react";
 
 export const AddWeight = () => {
+  const [open, setOpen] = useState(false);
+  const openHandler = () => setOpen((prev) => !prev);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>Update your weight</Button>
       </DialogTrigger>

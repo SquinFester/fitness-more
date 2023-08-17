@@ -2,6 +2,7 @@ import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { FormGoal } from "@prisma/client";
 import Link from "next/link";
+import { ErrorComunication } from "./ErrorComunication";
 
 type UserProfilePreviewProps = {
   image: string | undefined | null;
@@ -51,15 +52,11 @@ export const UserProfilePreview = ({
             </p>
           </>
         ) : (
-          <div className="flex flex-col max-w-fit">
-            <p>Complete your profile to take full advantage of our app</p>
-            <Link
-              href="/dashboard/goal-form"
-              className="underline text-primaryblue w-full text-right"
-            >
-              fill form
-            </Link>
-          </div>
+          <ErrorComunication
+            text="Complete your profile to take full advantage of our app"
+            link="/dashboard/goal-form"
+            linkText="fill form"
+          />
         )}
       </div>
     </section>
