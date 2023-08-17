@@ -14,17 +14,17 @@ import { useState } from "react";
 
 export const AddWeight = () => {
   const [open, setOpen] = useState(false);
-  const openHandler = () => setOpen((prev) => !prev);
+  const openHandler = () => setOpen(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Update your weight</Button>
+        <Button className="float-right">Update your weight</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Update your weight</DialogTitle>
           <DialogDescription asChild>
-            <AddWeightForm />
+            <AddWeightForm onSuccess={openHandler} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

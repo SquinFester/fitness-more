@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { AddWeight } from "@/components/DashboardMainPage/UserWeightStats/AddWeight";
 import { ErrorComunication } from "@/components/DashboardMainPage/ErrorComunication";
+import { WeightSection } from "@/components/DashboardMainPage/UserWeightStats/WeightSection";
 
 export default async function Dashboard() {
   const session = await getAuthSession();
@@ -14,6 +15,11 @@ export default async function Dashboard() {
     },
   });
   const userForm = await db.formGoal.findFirst({
+    where: {
+      userId: session?.user.id,
+    },
+  });
+  const getWeight = await db.weight.findMany({
     where: {
       userId: session?.user.id,
     },
@@ -36,29 +42,7 @@ export default async function Dashboard() {
         formInfo={userForm}
       />
       {userForm ? (
-        <>
-          <LineChart
-            userWeight={[
-              {
-                date: "13-10-2023",
-                weight: 130,
-              },
-              {
-                date: "15-10-2023",
-                weight: 200,
-              },
-              {
-                date: "10-10-2023",
-                weight: 110,
-              },
-              {
-                date: "12-10-2023",
-                weight: 150,
-              },
-            ]}
-          />
-          <AddWeight />
-        </>
+        <WeightSection userWeight={[...getWeight]} />
       ) : (
         <ErrorComunication
           text="Complete your profile to take full advantage of our app"

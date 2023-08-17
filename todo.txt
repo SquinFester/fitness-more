@@ -6,3 +6,4 @@ to do today:
         - prisma: add new table
         - form: react hook form
         - post it to a server and valid it by zod
+        - rounded graph with macro ingredients

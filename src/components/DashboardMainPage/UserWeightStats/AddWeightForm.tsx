@@ -48,7 +48,7 @@ export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
     },
     onSuccess: async () => {
       console.log("succes");
-      onSuccess;
+      onSuccess();
     },
     onError: async () => console.log("error"),
   });
