@@ -4,6 +4,8 @@ import { z } from "zod";
 
 export async function GET() {
   try {
+    console.log("asd");
+
     const session = await getAuthSession();
     if (!session) return new Response("Unauthorized", { status: 401 });
 

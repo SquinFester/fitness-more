@@ -9,7 +9,7 @@ import {
 } from "chart.js/auto";
 import { format } from "date-fns";
 import { WeightType } from "./WeightSection";
-import { addWeight } from "@/lib/weights-slice";
+import { addWeight, fetchInitialItems } from "@/lib/weights-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/store/store";
 import { useEffect } from "react";
@@ -20,14 +20,7 @@ export const LineChart = ({ userWeight }: { userWeight: WeightType[] }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(
-      addWeight({
-        userId: "string",
-        weight: 12,
-        date: new Date(),
-        id: "1232",
-      })
-    );
+    dispatch(fetchInitialItems());
   }, []);
 
   const sortedDate = userWeight.sort((a, b) => Number(a.date) - Number(b.date));
