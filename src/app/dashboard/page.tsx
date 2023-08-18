@@ -2,10 +2,8 @@ import { LineChart } from "@/components/DashboardMainPage/UserWeightStats/LineCh
 import { UserProfilePreview } from "@/components/DashboardMainPage/UserProfilePreview";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import Link from "next/link";
 import { AddWeight } from "@/components/DashboardMainPage/UserWeightStats/AddWeight";
 import { ErrorComunication } from "@/components/DashboardMainPage/ErrorComunication";
-import { WeightSection } from "@/components/DashboardMainPage/UserWeightStats/WeightSection";
 
 export default async function Dashboard() {
   const session = await getAuthSession();
@@ -19,11 +17,7 @@ export default async function Dashboard() {
       userId: session?.user.id,
     },
   });
-  const getWeight = await db.weight.findMany({
-    where: {
-      userId: session?.user.id,
-    },
-  });
+
   if (!session || !user)
     return (
       <ErrorComunication
@@ -42,7 +36,10 @@ export default async function Dashboard() {
         formInfo={userForm}
       />
       {userForm ? (
-        <WeightSection userWeight={[...getWeight]} />
+        <>
+          <AddWeight />
+          <LineChart />
+        </>
       ) : (
         <ErrorComunication
           text="Complete your profile to take full advantage of our app"

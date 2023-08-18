@@ -24,6 +24,9 @@ import { addWeightScheme, addWeightType } from "@/lib/validators/add-weight";
 import { InputWithLabel } from "@/components/GoalForm/InputWithLabel";
 import { useMutation } from "react-query";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/store";
+import { addWeight } from "@/lib/weights-slice";
 
 export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const form = useForm<addWeightType>({
@@ -34,7 +37,8 @@ export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
     },
   });
 
-  const { handleSubmit, control } = form;
+  const dispatch = useDispatch<AppDispatch>();
+  const { handleSubmit, control, watch } = form;
 
   const onSubmit = (data: addWeightType) => {
     mutate(data);
@@ -47,7 +51,12 @@ export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
       return data as string;
     },
     onSuccess: async () => {
-      console.log("succes");
+      dispatch(
+        addWeight({
+          date: watch("date"),
+          weight: watch("weight"),
+        })
+      );
       onSuccess();
     },
     onError: async () => console.log("error"),

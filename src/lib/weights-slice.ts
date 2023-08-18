@@ -1,10 +1,14 @@
-import { Weight } from "@prisma/client";
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 type initialStateType = {
-  items: Weight[];
+  items: fetchedWeightType[];
   status: "loading" | "succeeded" | "failed" | "idle";
+};
+
+type fetchedWeightType = {
+  weight: number;
+  date: Date;
 };
 
 export const fetchInitialItems = createAsyncThunk(
@@ -24,9 +28,12 @@ export const weights = createSlice({
   name: "weights",
   initialState,
   reducers: {
-    addWeight: (state, action: PayloadAction<Weight>) => {
+    addWeight: (state, action: PayloadAction<fetchedWeightType>) => {
       const array = [...state.items, action.payload];
-      const sortedItems = array.sort((a, b) => Number(a.date) - Number(b.date));
+      const sortedItems = array.sort(
+        (a, b) => Number(new Date(a.date)) - Number(new Date(b.date))
+      );
+      console.log(array, sortedItems);
 
       return {
         ...state,
@@ -39,10 +46,13 @@ export const weights = createSlice({
       .addCase(fetchInitialItems.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchInitialItems.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.items = action.payload;
-      })
+      .addCase(
+        fetchInitialItems.fulfilled,
+        (state, action: PayloadAction<fetchedWeightType[]>) => {
+          state.status = "succeeded";
+          state.items = action.payload;
+        }
+      )
       .addCase(fetchInitialItems.rejected, (state) => {
         state.status = "failed";
       });

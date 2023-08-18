@@ -8,37 +8,32 @@ import {
   LineElement,
 } from "chart.js/auto";
 import { format } from "date-fns";
-import { WeightType } from "./WeightSection";
-import { addWeight, fetchInitialItems } from "@/lib/weights-slice";
+import { fetchInitialItems } from "@/lib/weights-slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/store/store";
 import { useEffect } from "react";
 
 Chartjs.register(CategoryScale, LinearScale, LineElement);
 
-export const LineChart = ({ userWeight }: { userWeight: WeightType[] }) => {
+export const LineChart = () => {
   const dispatch = useDispatch<AppDispatch>();
-
   useEffect(() => {
     dispatch(fetchInitialItems());
   }, []);
+  const userWeights = useAppSelector((state) => state.weightsReducer.items);
 
-  const sortedDate = userWeight.sort((a, b) => Number(a.date) - Number(b.date));
   const data = {
-    labels: sortedDate.map((data) => format(data.date, "dd MMM")),
+    labels: userWeights.map((data) => format(new Date(data.date), "dd MMM")),
     datasets: [
       {
         label: "Users Gained",
-        data: sortedDate.map((data) => data.weight),
+        data: userWeights.map((data) => data.weight),
         backgroundColor: ["#0066EE"],
         borderColor: "#0066EE",
         borderWidth: 2,
       },
     ],
   };
-
-  const a = useAppSelector((state) => state.weightsReducer.items);
-  console.log(a);
 
   return <Line data={data} />;
 };
