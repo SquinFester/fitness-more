@@ -27,6 +27,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { addWeight } from "@/lib/weights-slice";
+import { useToast } from "@/lib/use-toast";
 
 export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const form = useForm<addWeightType>({
@@ -38,6 +39,7 @@ export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
   });
 
   const dispatch = useDispatch<AppDispatch>();
+  const { toast } = useToast();
   const { handleSubmit, control, watch } = form;
 
   const onSubmit = (data: addWeightType) => {
@@ -59,7 +61,13 @@ export const AddWeightForm = ({ onSuccess }: { onSuccess: () => void }) => {
       );
       onSuccess();
     },
-    onError: async () => console.log("error"),
+    onError: async () => {
+      toast({
+        title: "error",
+        description: "Something went wrong, try again",
+        variant: "destructive",
+      });
+    },
   });
 
   return (
