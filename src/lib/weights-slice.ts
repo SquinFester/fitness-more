@@ -4,6 +4,7 @@ import axios from "axios";
 type initialStateType = {
   items: fetchedWeightType[];
   status: "loading" | "succeeded" | "failed" | "idle";
+  currentWeight?: number | null;
 };
 
 type fetchedWeightType = {
@@ -22,6 +23,7 @@ export const fetchInitialItems = createAsyncThunk(
 const initialState: initialStateType = {
   items: [],
   status: "idle",
+  currentWeight: null,
 };
 
 export const weights = createSlice({
@@ -33,11 +35,10 @@ export const weights = createSlice({
       const sortedItems = array.sort(
         (a, b) => Number(new Date(a.date)) - Number(new Date(b.date))
       );
-      console.log(array, sortedItems);
-
       return {
         ...state,
         items: sortedItems,
+        currentWeight: sortedItems.slice(-1)[0].weight,
       };
     },
   },
@@ -46,13 +47,11 @@ export const weights = createSlice({
       .addCase(fetchInitialItems.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(
-        fetchInitialItems.fulfilled,
-        (state, action: PayloadAction<fetchedWeightType[]>) => {
-          state.status = "succeeded";
-          state.items = action.payload;
-        }
-      )
+      .addCase(fetchInitialItems.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.items = action.payload;
+        state.currentWeight = action.payload.slice(-1)[0].weight;
+      })
       .addCase(fetchInitialItems.rejected, (state) => {
         state.status = "failed";
       });

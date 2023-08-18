@@ -1,8 +1,10 @@
+"use client";
+
 import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { FormGoal } from "@prisma/client";
-import Link from "next/link";
 import { ErrorComunication } from "./ErrorComunication";
+import { useAppSelector } from "@/store/store";
 
 type UserProfilePreviewProps = {
   image: string | undefined | null;
@@ -15,6 +17,8 @@ export const UserProfilePreview = ({
   name,
   formInfo,
 }: UserProfilePreviewProps) => {
+  const weights = useAppSelector((state) => state.weightsReducer.currentWeight);
+
   return (
     <section className="grid grid-cols-3 shadow-md divide-x-2 py-4 rounded-md">
       <div className=" flex justify-center items-center">
@@ -38,7 +42,7 @@ export const UserProfilePreview = ({
             </p>
             <p>
               <span className="font-medium">Weight: </span>
-              {formInfo.weight} kg
+              {weights} kg
             </p>
             {formInfo.goal === "Maintain Weight" ? null : (
               <p>
