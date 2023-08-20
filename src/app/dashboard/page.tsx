@@ -4,6 +4,7 @@ import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { AddWeight } from "@/components/DashboardMainPage/UserWeightStats/AddWeight";
 import { ErrorComunication } from "@/components/DashboardMainPage/ErrorComunication";
+import { GoalFormType } from "@/lib/validators/goal-form";
 
 export default async function Dashboard() {
   const session = await getAuthSession();
@@ -30,13 +31,13 @@ export default async function Dashboard() {
 
   return (
     <main className="mt-10 space-y-10">
-      <UserProfilePreview
-        image={user.image}
-        name={user.name}
-        formInfo={userForm}
-      />
       {userForm ? (
         <>
+          <UserProfilePreview
+            image={user.image}
+            name={user.name}
+            formInfo={userForm as GoalFormType}
+          />
           <AddWeight />
           <LineChart />
         </>

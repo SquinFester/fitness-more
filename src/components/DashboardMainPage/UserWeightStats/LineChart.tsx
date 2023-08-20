@@ -26,7 +26,7 @@ export const LineChart = () => {
     labels: userWeights.map((data) => format(new Date(data.date), "dd MMM")),
     datasets: [
       {
-        label: "Users Gained",
+        label: "Your Weights",
         data: userWeights.map((data) => data.weight),
         backgroundColor: ["#0066EE"],
         borderColor: "#0066EE",
