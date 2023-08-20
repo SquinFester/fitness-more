@@ -30,7 +30,7 @@ export const UserProfilePreview = ({
 
   return (
     <section className="grid md:grid-cols-3 shadow-md md:divide-x-2 py-4 rounded-md ">
-      <div className="flex justify-center items-center col-span-1">
+      <div className="flex justify-center items-center col-span-1 flex-col gap-4">
         <Avatar className="w-20 h-20">
           {image ? (
             <AvatarImage src={image} alt="user's profile" />
@@ -40,10 +40,9 @@ export const UserProfilePreview = ({
             </AvatarFallback>
           )}
         </Avatar>
+        <h1 className="text-lg font-semibold">{name}</h1>
       </div>
       <div className=" p-5 col-span-1">
-        <h1 className="text-lg font-semibold text-center">{name}</h1>
-
         <p>
           <span className="font-medium">Goal: </span>
           {formInfo.goal}
