@@ -1,12 +1,29 @@
-import { Carousel } from "@/components/Carousel/Carousel";
-import { FlexDescription } from "@/components/HomePageElements/FlexDescription";
-import { OfferSection } from "@/components/HomePageElements/OfferSection";
-import { RecipesCard } from "@/components/HomePageElements/RecipesCard";
-import { ToolsDescription } from "@/components/HomePageElements/ToolsDescription";
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+const Carousel = dynamic(() => import("@/components/Carousel/Carousel"));
+const FlexDescription = dynamic(() =>
+  import("@/components/HomePageElements/FlexDescription").then(
+    (mod) => mod.FlexDescription
+  )
+);
+const OfferSection = dynamic(() =>
+  import("@/components/HomePageElements/OfferSection").then(
+    (mod) => mod.OfferSection
+  )
+);
+const RecipesCard = dynamic(() =>
+  import("@/components/HomePageElements/RecipesCard").then(
+    (mod) => mod.RecipesCard
+  )
+);
+const ToolsDescription = dynamic(() =>
+  import("@/components/HomePageElements/ToolsDescription").then(
+    (mod) => mod.ToolsDescription
+  )
+);
 
 export default async function Home() {
   return (

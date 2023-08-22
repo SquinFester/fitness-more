@@ -32,7 +32,7 @@ export const CardTheme = ({
             className="opacity-40 absolute -top-[50px] left-0 rotate-12 -z-10"
           />
         </div>
-        <i>"{description}"</i>
+        <i>&quot;{description}&quot;</i>
         <p className="w-full text-right text-lg">~{name}</p>
       </div>
     </article>

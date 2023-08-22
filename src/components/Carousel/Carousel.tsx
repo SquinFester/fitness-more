@@ -31,8 +31,7 @@ const data = [
     name: "Lori",
   },
 ];
-
-export const Carousel = () => {
+const Carousel = () => {
   return (
     <Swiper
       spaceBetween={30}
@@ -61,3 +60,5 @@ export const Carousel = () => {
     </Swiper>
   );
 };
+
+export default Carousel;
