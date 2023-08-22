@@ -29,7 +29,7 @@ export default function RootLayout({
         <Navbar />
         {authModal}
         <Providers>
-          <div className="container h-full flex-1">{children}</div>
+          <div className="container h-full flex-1 relative">{children}</div>
         </Providers>
         <Toaster />
         <Footer />

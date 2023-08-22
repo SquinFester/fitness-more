@@ -6,6 +6,8 @@ import { useAppSelector } from "@/store/store";
 import { CaloriesGraph } from "./CaloriesGraph";
 import { dailyCalories } from "@/lib/dailyCalories";
 import { GoalFormType } from "@/lib/validators/goal-form";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 type UserProfilePreviewProps = {
   image: string | undefined | null;

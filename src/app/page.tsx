@@ -3,7 +3,7 @@ import { FlexDescription } from "@/components/HomePageElements/FlexDescription";
 import { OfferSection } from "@/components/HomePageElements/OfferSection";
 import { RecipesCard } from "@/components/HomePageElements/RecipesCard";
 import { ToolsDescription } from "@/components/HomePageElements/ToolsDescription";
-import { Button, buttonVariants } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
