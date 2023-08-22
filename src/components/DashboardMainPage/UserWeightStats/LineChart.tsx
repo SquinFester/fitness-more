@@ -8,18 +8,11 @@ import {
   LineElement,
 } from "chart.js/auto";
 import { format } from "date-fns";
-import { fetchInitialItems } from "@/lib/weights-slice";
-import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/store/store";
-import { useEffect } from "react";
+import { useAppSelector } from "@/store/store";
 
 Chartjs.register(CategoryScale, LinearScale, LineElement);
 
 export const LineChart = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(fetchInitialItems());
-  }, []);
   const userWeights = useAppSelector((state) => state.weightsReducer.items);
 
   const data = {

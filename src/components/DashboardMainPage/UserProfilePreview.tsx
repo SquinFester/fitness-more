@@ -2,12 +2,13 @@
 
 import { User } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-import { useAppSelector } from "@/store/store";
+import { AppDispatch, useAppSelector } from "@/store/store";
 import { CaloriesGraph } from "./CaloriesGraph";
 import { dailyCalories } from "@/lib/dailyCalories";
 import { GoalFormType } from "@/lib/validators/goal-form";
-import { Suspense } from "react";
-import Loading from "@/app/loading";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchInitialItems } from "@/lib/weights-slice";
 
 type UserProfilePreviewProps = {
   image: string | undefined | null;
@@ -20,6 +21,11 @@ export const UserProfilePreview = ({
   name,
   formInfo,
 }: UserProfilePreviewProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchInitialItems());
+  }, []);
+
   const weights = useAppSelector((state) => state.weightsReducer.currentWeight);
   const { calories, proteinGrams, carbGrams, fatGrams } = dailyCalories({
     age: formInfo.age,
@@ -31,7 +37,7 @@ export const UserProfilePreview = ({
   });
 
   return (
-    <section className="grid md:grid-cols-3 shadow-md md:divide-x-2 py-4 rounded-md ">
+    <section className="grid md:grid-cols-3 md:shadow-md md:divide-x-2 py-4 rounded-md ">
       <div className="flex justify-center items-center col-span-1 flex-col gap-4">
         <Avatar className="w-20 h-20">
           {image ? (
@@ -64,7 +70,7 @@ export const UserProfilePreview = ({
         </p>
         <p>
           <span className="font-medium">Weight: </span>
-          {weights} kg
+          {weights ? `${weights} kg` : "Loading..."}
         </p>
         {formInfo.goal === "Maintain Weight" ? null : (
           <p>
